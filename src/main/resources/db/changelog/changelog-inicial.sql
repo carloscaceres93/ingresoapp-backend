@@ -34,7 +34,7 @@ CREATE TABLE empleado(
 	id_tipo_identificacion INT NOT NULL,
 	 	FOREIGN KEY (id_tipo_identificacion) REFERENCES detalle(id),
 	numero_identificacion VARCHAR(20) NOT NULL UNIQUE,
-    email VARCHAR(300) NOT NULL UNIQUE,
+    email VARCHAR(300),
     fecha_ingreso DATE,
     id_area INT NOT NULL,
 	 	FOREIGN KEY (id_area) REFERENCES detalle(id),

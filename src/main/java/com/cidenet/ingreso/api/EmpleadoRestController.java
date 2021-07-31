@@ -51,16 +51,18 @@ public class EmpleadoRestController {
 	}
 
 	@PostMapping
-	public ResponseEntity<Empleado> save(@Valid @RequestBody Empleado empleados) throws Exception {
-		Empleado obj = empleadosService.save(empleados);
+	public ResponseEntity<Empleado> save(@Valid @RequestBody Empleado empleado) throws Exception {
+		
+		System.out.println(empleado.toString());
+		Empleado obj = empleadosService.save(empleado);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
 	}
 
 	@PutMapping
-	public ResponseEntity<Empleado> modify(@Valid @RequestBody Empleado empleados) throws Exception {
-		Empleado obj = empleadosService.save(empleados);
+	public ResponseEntity<Empleado> modify(@Valid @RequestBody Empleado empleado) throws Exception {
+		Empleado obj = empleadosService.save(empleado);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();

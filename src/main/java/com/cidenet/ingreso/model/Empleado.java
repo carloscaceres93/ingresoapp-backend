@@ -19,10 +19,8 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(catalog = "cidenet_db")
 public class Empleado {
@@ -64,11 +62,11 @@ public class Empleado {
 	@JoinColumn(name = "id_tipo_identificacion", nullable = false)
 	private Detalle tipoIdentificacion;
 
+	@NotNull(message = "El campo 'IDENTIFICACION' no puede estar vacío")
 	@Pattern(regexp="^[a-zA-Z0-9-]+$",message="El campo 'NUMERO IDENTIFICACION' solo admite caracteres alfanuméricos y guion (-)")
 	@Column(length = 20, nullable = false, unique = true)
 	private String numeroIdentificacion;
 	
-	@NotNull(message = "El campo 'EMAIL' no puede estar vacío")
 	@Email(message = "el campo 'EMAIL' debe ser una dirección válida")
 	@Column(length = 300, nullable = false, unique = true)
 	private String email;
@@ -93,26 +91,5 @@ public class Empleado {
 	@JsonFormat(pattern = "DD/MM/YYYY HH:mm:ss")
 	@Column
 	private LocalDateTime fechaHoraEdicion;
-
-	public Empleado(Integer id, String primerApellido, String segundoApellido, String primerNombre, String otroNombre,
-			Pais pais, Detalle tipoIdentificacion, String numeroIdentificacion, @Email String email,
-			LocalDate fechaIngreso, Detalle area, Detalle estado, LocalDateTime fechaHoraRegistro,
-			LocalDateTime fechaHoraEdicion) {
-		super();
-		this.id = id;
-		this.primerApellido = primerApellido;
-		this.segundoApellido = segundoApellido;
-		this.primerNombre = primerNombre;
-		this.otroNombre = otroNombre;
-		this.pais = pais;
-		this.tipoIdentificacion = tipoIdentificacion;
-		this.numeroIdentificacion = numeroIdentificacion;
-		this.email = email;
-		this.fechaIngreso = fechaIngreso;
-		this.area = area;
-		this.estado = estado;
-		this.fechaHoraRegistro = fechaHoraRegistro;
-		this.fechaHoraEdicion = fechaHoraEdicion;
-	}
 
 }

@@ -32,7 +32,7 @@ public class PaisServiceImpl implements IPaisService {
 			throw new ModeloNotFoundException(
 					"Error al registrar: El Pais ya existe en la base de datos id: " + pais.getId());
 		}
-		return paisRepo.save(t);
+		return paisRepo.save(pais);
 	}
 
 	@Override
@@ -70,12 +70,12 @@ public class PaisServiceImpl implements IPaisService {
 	public void delete(Integer id) throws Exception {
 		Pais pais = this.findById(id);
 
-		if (pais.getId() == null) {
+		if (pais == null) {
 			LOGGER.error("Error al eliminar: El Pais no existe en la base de datos id: " + id);
 			
 			throw new ModeloNotFoundException("Error al Eliminar: El Pais no existe en la base de datos id: " + id);
 		}
-		paisRepo.deleteById(id);
+		paisRepo.deleteById(pais.getId());
 
 	}
 
