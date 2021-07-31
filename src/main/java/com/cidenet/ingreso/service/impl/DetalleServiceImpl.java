@@ -18,12 +18,12 @@ public class DetalleServiceImpl implements IDetalleService {
 
 	@Override
 	public List<Detalle> findAllArea() {
-		return detalleRepo.findByIdMestro(Maestro.ID.AREA);
+		return detalleRepo.findByIdMaestro(Maestro.ID.AREA);
 	}
 
 	@Override
 	public List<Detalle> findAllTipoDocumento() {
-		return detalleRepo.findByIdMestro(Maestro.ID.TIPO_IDENTIFICACION);
+		return detalleRepo.findByIdMaestro(Maestro.ID.TIPO_IDENTIFICACION);
 	}
 
 }

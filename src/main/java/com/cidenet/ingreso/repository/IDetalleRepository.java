@@ -9,6 +9,6 @@ import com.cidenet.ingreso.model.Detalle;
 
 public interface IDetalleRepository extends IGenericRepository<Detalle, Integer>{
 
-	@Query("FROM Detalle d WHERE d.mestro.id = :idMaestro")
-	List<Detalle> findByIdMestro(@Param("idMaestro") Integer idMestro);
+	@Query("FROM Detalle d WHERE d.maestro.id = :idMaestro")
+	List<Detalle> findByIdMaestro(@Param("idMaestro") Integer idMestro);
 }
