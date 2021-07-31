@@ -6,8 +6,8 @@ import com.cidenet.ingreso.model.Detalle;
 
 public interface IDetalleService {
 
-	List<Detalle> findAllArea();
+	List<Detalle> findAllArea() throws Exception;
 
-	List<Detalle> findAllTipoDocumento();
+	List<Detalle> findAllTipoIdentificacion()throws Exception;
 
 }

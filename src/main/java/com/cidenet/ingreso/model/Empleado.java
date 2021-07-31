@@ -32,24 +32,24 @@ public class Empleado {
 	private Integer id;
 
 	@NotNull(message = "El  'PRIMER APELLIDO' no puede estar vacío")
-	@Pattern(regexp = "^[A-Z ]+$", message = "El  'PRIMER APELLIDO' solo admite letras mayúsculas, no puede contener acentos, espacios ni ñ")
+	@Pattern(regexp = "^[A-Z ]+$", message = "El  'PRIMER APELLIDO' solo admite letras mayúsculas, no puede contener acentos o carateres especiales")
 	@Size(max = 20, message = "EL 'PRIMER APELLIDO' debe contener entre 4 y 20 letras")
 	@Column(length = 20, nullable = false)
 	private String primerApellido;
 
-	@Pattern(regexp = "^[A-Z ]+$", message = "El  'SEGUNDO APELLIDO' solo admite letras mayúsculas, no puede contener acentos, espacios ni ñ")
+	@Pattern(regexp = "^[A-Z ]+$", message = "El  'SEGUNDO APELLIDO' solo admite letras mayúsculas, no puede contener acentos o carateres especiales")
 	@Size(max = 20, message = "EL 'SEGUNDO APELLIDO' debe contener entre 4 y 20 letras")
 	@Column(length = 20)
 	private String segundoApellido;
 
 	@NotNull(message = "El  'PRIMER NOMBRE' no puede estar vacío")
-	@Pattern(regexp = "^[A-Z]+$", message = "el  'PRIMER NOMBRE' solo admite letras mayúsculas, no puede contener acentos, espacios ni ñ")
+	@Pattern(regexp = "^[A-Z]+$", message = "el  'PRIMER NOMBRE' solo admite letras mayúsculas, no puede contener acentos, espacios o carateres especiales")
 	@Size(max = 20, message = "EL 'PRIMER NOMBRE' debe contener entre 4 y 20 letras")
 	@Column(length = 20, nullable = false)
 	private String primerNombre;
 
 	
-	@Pattern(regexp="^[A-Z ]+$",message="el campo 'OTRO NOMBRE' solo admite letras mayusculas, no puede contener asentos, espacios ni ñ")
+	@Pattern(regexp="^[A-Z ]+$",message="el campo 'OTRO NOMBRE' solo admite letras mayusculas, no puede contener asentos o carateres especiales")
 	@Size(max = 50,message = "EL campo 'OTRO NOMBRE' debe contener entre 4 y 20 letras")
 	@Column(length = 50)
 	private String otroNombre;
