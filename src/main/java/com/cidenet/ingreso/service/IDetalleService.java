@@ -4,7 +4,10 @@ import java.util.List;
 
 import com.cidenet.ingreso.model.Detalle;
 
-public interface IDetalleService extends ICRUDService<Detalle, Integer> {
+public interface IDetalleService {
 
-	List<Detalle> findByIdMestro(Integer idMaestro);
+	List<Detalle> findAllArea();
+
+	List<Detalle> findAllTipoDocumento();
+
 }
