@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    database: MYSQL
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:mysql://localhost/cidenet_db?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username : root
+    password: cidenet
+server:
+  port: 8291
