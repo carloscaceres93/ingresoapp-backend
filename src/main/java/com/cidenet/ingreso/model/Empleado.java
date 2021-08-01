@@ -19,8 +19,10 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(catalog = "cidenet_db")
 public class Empleado {
@@ -46,9 +48,8 @@ public class Empleado {
 	@Column(length = 20, nullable = false)
 	private String primerNombre;
 
-	
-	@Pattern(regexp="^[A-Z ]+$",message="el campo 'OTRO NOMBRE' solo admite letras mayusculas, no puede contener asentos o carateres especiales")
-	@Size(max = 50,message = "EL campo 'OTRO NOMBRE' debe contener entre 4 y 20 letras")
+	@Pattern(regexp = "^[A-Z ]+$", message = "el campo 'OTRO NOMBRE' solo admite letras mayusculas, no puede contener asentos o carateres especiales")
+	@Size(max = 50, message = "EL campo 'OTRO NOMBRE' debe contener entre 4 y 20 letras")
 	@Column(length = 50)
 	private String otroNombre;
 
@@ -63,15 +64,15 @@ public class Empleado {
 	private Detalle tipoIdentificacion;
 
 	@NotNull(message = "El campo 'IDENTIFICACION' no puede estar vacío")
-	@Pattern(regexp="^[a-zA-Z0-9-]+$",message="El campo 'NUMERO IDENTIFICACION' solo admite caracteres alfanuméricos y guion (-)")
+	@Pattern(regexp = "^[a-zA-Z0-9-]+$", message = "El campo 'NUMERO IDENTIFICACION' solo admite caracteres alfanuméricos y guion (-)")
 	@Column(length = 20, nullable = false, unique = true)
 	private String numeroIdentificacion;
-	
+
 	@Email(message = "el campo 'EMAIL' debe ser una dirección válida")
 	@Column(length = 300, nullable = false, unique = true)
 	private String email;
 
-	@JsonFormat(pattern="dd/MM/yyyy")
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column
 	private LocalDate fechaIngreso;
 
@@ -91,5 +92,25 @@ public class Empleado {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column
 	private LocalDateTime fechaHoraEdicion;
+
+	public Empleado(Integer id, String primerApellido, String segundoApellido, String primerNombre, String otroNombre,
+			Pais pais, Detalle tipoIdentificacion, String numeroIdentificacion, String email, LocalDate fechaIngreso,
+			Detalle area, Detalle estado, LocalDateTime fechaHoraRegistro, LocalDateTime fechaHoraEdicion) {
+
+		this.id = id;
+		this.primerApellido = primerApellido;
+		this.segundoApellido = segundoApellido;
+		this.primerNombre = primerNombre;
+		this.otroNombre = otroNombre;
+		this.pais = pais;
+		this.tipoIdentificacion = tipoIdentificacion;
+		this.numeroIdentificacion = numeroIdentificacion;
+		this.email = email;
+		this.fechaIngreso = fechaIngreso;
+		this.area = area;
+		this.estado = estado;
+		this.fechaHoraRegistro = fechaHoraRegistro;
+		this.fechaHoraEdicion = fechaHoraEdicion;
+	}
 
 }

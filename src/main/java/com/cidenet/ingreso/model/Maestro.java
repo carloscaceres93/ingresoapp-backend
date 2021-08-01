@@ -8,8 +8,10 @@ import javax.persistence.Table;
 import com.sun.istack.NotNull;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(catalog = "cidenet_db")
 public class Maestro {
@@ -24,4 +26,13 @@ public class Maestro {
 	@NotNull
 	@Column(length = 50, nullable = false)
 	private String descripcion;
+
+	public Maestro(Integer id, String nombre, String descripcion) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+	}
+	
+	
 }

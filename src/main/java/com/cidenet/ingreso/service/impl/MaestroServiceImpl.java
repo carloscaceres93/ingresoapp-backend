@@ -10,7 +10,7 @@ import com.cidenet.ingreso.repository.IMaestroRepoitory;
 import com.cidenet.ingreso.service.IMaestroService;
 
 @Service
-public class MestroServiceImpl implements IMaestroService {
+public class MaestroServiceImpl implements IMaestroService {
 
 	@Autowired
 	private IMaestroRepoitory mestroRepo;
@@ -32,7 +32,7 @@ public class MestroServiceImpl implements IMaestroService {
 
 	@Override
 	public Maestro findById(Integer id) throws Exception {
-		return mestroRepo.findById(id).orElseThrow();
+		return mestroRepo.findById(id).orElse(null);
 	}
 
 	@Override

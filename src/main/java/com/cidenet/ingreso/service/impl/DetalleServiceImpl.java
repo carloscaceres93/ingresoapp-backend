@@ -1,6 +1,7 @@
 package com.cidenet.ingreso.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,10 @@ public class DetalleServiceImpl implements IDetalleService {
 
 	@Override
 	public Detalle findById(Integer id) throws Exception {
+		Optional<Detalle> detalle = detalleRepo.findById(id);
+		if(!detalle.isPresent()) {
+			throw new ModeloNotFoundException("NO existe el elemento; id:" + id);
+		}
 		return detalleRepo.findById(id).orElse(null);
 	}
 

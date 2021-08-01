@@ -42,7 +42,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 	@Override
 	public Empleado save(Empleado t) throws Exception {
 		String mensaje = "";
-		Detalle detalle = detalleService.findById(Constantes.ESTADO.ACTIVO);
+		Detalle estado = detalleService.findById(Constantes.ESTADO.ACTIVO);
 		
 //		Valida que la fecha no sea mayor a la actual ni menor 1 mes
 		if(!utilComponent.validarFechaIngreso(t.getFechaIngreso())) {
@@ -53,7 +53,7 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 		
 		t.setEmail(this.construirEmail(t));
 		t.setFechaHoraRegistro(LocalDateTime.now());
-		t.setEstado(detalle);
+		t.setEstado(estado);
 		return empleadoRepo.save(t);
 	}
 
