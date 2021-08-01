@@ -9,6 +9,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -62,7 +64,7 @@ public class EmpleadoRestController {
 
 	@PutMapping
 	public ResponseEntity<Empleado> modify(@Valid @RequestBody Empleado empleado) throws Exception {
-		Empleado obj = empleadosService.save(empleado);
+		Empleado obj = empleadosService.modify(empleado);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
@@ -74,4 +76,10 @@ public class EmpleadoRestController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 
+	@GetMapping("/pageable")
+	public ResponseEntity<Page<Empleado>> listarPageable(Pageable pageable) throws Exception{
+		Page<Empleado> pacientes = empleadosService.paginarlistaEmpleado(pageable);
+		return new ResponseEntity<Page<Empleado>>(pacientes, HttpStatus.OK);
+	}
+	
 }

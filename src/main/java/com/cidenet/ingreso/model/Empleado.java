@@ -88,7 +88,7 @@ public class Empleado {
 	@Column
 	private LocalDateTime fechaHoraRegistro;
 
-	@JsonFormat(pattern = "DD/MM/YYYY HH:mm:ss")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column
 	private LocalDateTime fechaHoraEdicion;
 
