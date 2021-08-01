@@ -37,4 +37,9 @@ public class DetalleServiceImpl implements IDetalleService {
 		return tiposIdentificacion;
 	}
 
+	@Override
+	public Detalle findById(Integer id) throws Exception {
+		return detalleRepo.findById(id).orElse(null);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.cidenet.ingreso.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,11 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.cidenet.ingreso.exception.ModeloNotFoundException;
+import com.cidenet.ingreso.model.Detalle;
 import com.cidenet.ingreso.model.Empleado;
 import com.cidenet.ingreso.model.Pais;
 import com.cidenet.ingreso.repository.IEmpleadoRepository;
+import com.cidenet.ingreso.service.IDetalleService;
 import com.cidenet.ingreso.service.IEmpleadoService;
 import com.cidenet.ingreso.service.IPaisService;
+import com.cidenet.ingreso.util.Constantes;
 import com.cidenet.ingreso.util.UtilComponent;
 
 @Service
@@ -29,19 +33,50 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 	@Autowired
 	private IPaisService paisService;
 	
+	@Autowired
+	private IDetalleService detalleService;
+	
 	@Autowired 
 	private UtilComponent utilComponent;
 	
 	@Override
 	public Empleado save(Empleado t) throws Exception {
+		String mensaje = "";
+		Detalle detalle = detalleService.findById(Constantes.ESTADO.ACTIVO);
+		
+//		Valida que la fecha no sea mayor a la actual ni menor 1 mes
+		if(!utilComponent.validarFechaIngreso(t.getFechaIngreso())) {
+			mensaje = "Fecha invalida; la fecha no puede ser menor a 1 mes ni mayor de la fecha actual";
+			LOGGER.error(mensaje);
+			throw new ModeloNotFoundException(mensaje);
+		}
 		
 		t.setEmail(this.construirEmail(t));
+		t.setFechaHoraRegistro(LocalDateTime.now());
+		t.setEstado(detalle);
 		return empleadoRepo.save(t);
 	}
 
 	@Override
 	public Empleado modify(Empleado t) throws Exception {
-		return empleadoRepo.save(t);
+		Empleado empleado = empleadoRepo.findById(t.getId()).orElse(null);
+		String mensaje = "";
+		
+		if (empleado == null) {
+			mensaje = "Error al Actualizar: El empleado no existe en la base de datos; id: " + t.getId();
+			LOGGER.error(mensaje);
+			throw new ModeloNotFoundException(mensaje);
+		}
+		
+		if(!utilComponent.validarFechaIngreso(t.getFechaIngreso())) {
+			mensaje = "Fecha invalida; la fecha no puede ser menor a 1 mes ni mayor de la fecha actual";
+			LOGGER.error(mensaje);
+			throw new ModeloNotFoundException(mensaje);
+		}
+		
+		empleado.setEmail(this.construirEmail(t));
+		empleado.setFechaHoraEdicion(LocalDateTime.now());
+		return empleadoRepo.save(empleado);
 	}
 
 	@Override
@@ -101,16 +136,19 @@ public class EmpleadoServiceImpl implements IEmpleadoService {
 		String dominio = pais.getDominio();
 		String email = "";
 		int validarEmail = 0;
-		email = empleado.getPrimerNombre() + "." + empleado.getPrimerApellido();
+		email = utilComponent.formatearEmail(empleado.getPrimerNombre() + "." + empleado.getPrimerApellido());
+
 		validarEmail = empleadoRepo.validarEmail(email);
 
 		if (validarEmail > 0) {
 			int id = validarEmail + 1;
 			email += "" + id + "@" + dominio;
-			return utilComponent.formatearEmail(email);
+			System.out.println(email);
+			return email;
 		} else {
 			email += "@" + dominio;
-			return utilComponent.formatearEmail(email);
+	
+			return email;
 		}
 	}
 

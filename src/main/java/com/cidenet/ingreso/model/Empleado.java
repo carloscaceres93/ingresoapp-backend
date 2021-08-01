@@ -71,7 +71,7 @@ public class Empleado {
 	@Column(length = 300, nullable = false, unique = true)
 	private String email;
 
-	@JsonFormat(pattern = "DD-MM-YYYY")
+	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column
 	private LocalDate fechaIngreso;
 
@@ -84,7 +84,7 @@ public class Empleado {
 	@JoinColumn(name = "id_estado", nullable = false)
 	private Detalle estado;
 
-	@JsonFormat(pattern = "DD/MM/YYYY HH:mm:ss")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	@Column
 	private LocalDateTime fechaHoraRegistro;
 

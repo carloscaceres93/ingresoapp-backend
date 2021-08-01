@@ -9,5 +9,7 @@ public interface IDetalleService {
 	List<Detalle> findAllArea() throws Exception;
 
 	List<Detalle> findAllTipoIdentificacion()throws Exception;
+	
+	Detalle findById(Integer id) throws Exception;
 
 }
