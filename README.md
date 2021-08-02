@@ -18,7 +18,7 @@
   
 # Urls aplicacion: 
 * api: http://localhost:8291
-* swagger: http://localhost:8291/swagger-ui
+* swagger: http://localhost:8291/swagger-ui/index.html agregar en el explorer (/v3/api-docs)
 
 
 
